@@ -24,7 +24,7 @@ class ListingController extends Controller
 
             return view('listing', compact('listings'));
         } else {
-            return view('mange', compact('listings'));
+            return view('index', compact('listings'));
         }
     }
 
