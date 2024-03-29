@@ -2,7 +2,14 @@
 
 namespace App\Providers;
 
+// use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\PaginationServiceProvider;
+use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Support\ServiceProvider;
+use Nette\Utils\Paginator as UtilsPaginator;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-
+        // Model::unguard();
+        // to unuse $fillable again in model
+        Paginator::useTailwind();
     }
 }

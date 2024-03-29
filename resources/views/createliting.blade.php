@@ -24,12 +24,18 @@
                     <div class="mb-6">
                         <label for="company" class="inline-block text-lg mb-2">Company Name</label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="company" />
+                        @error('company')
+                            <p style="color: red">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
                         <label for="title" class="inline-block text-lg mb-2">Job Title</label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="title"
                             placeholder="Example: Senior Laravel Developer" />
+                        @error('title')
+                            <p style="color: red">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
@@ -41,6 +47,9 @@
                     <div class="mb-6">
                         <label for="email" class="inline-block text-lg mb-2">Contact Email</label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="email" />
+                        @error('email')
+                            <p style="color: red">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
@@ -48,6 +57,9 @@
                             Website/Application URL
                         </label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="website" />
+                        @error('website')
+                            <p style="color: red">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
@@ -77,8 +89,7 @@
                         <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
                             Create Gig
                         </button>
-
-                        <a href="/" class="text-black ml-4"> Back </a>
+                        <a href="{{ route('listings.index') }}" class="text-black ml-4"> Back </a>
                     </div>
                 </form>
             </div>

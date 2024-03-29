@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class ListingController extends Controller
 {
-    //
+
     public function index(Request $request)
     {
         $search = "%$request->search%";
-        $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->get();
+        $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
         // $tagsString  = $listings->tags;
         // dd($tagsString);
 
@@ -37,6 +37,10 @@ class ListingController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string'],
+            'company' => ['required', 'string', 'unique:listings,company'],
+            'email' => ['required', 'email'],
+            'website' => ['required']
+
         ]);
         if ($request->has('image')) {
             $filename = time() . "." . $request->image->extension();
@@ -78,7 +82,7 @@ class ListingController extends Controller
             File::delete(public_path("/images/listings/") . $listing->logo);
         }
         $listing->update($request->all());
-        return redirect(route('listings.show', $id));
+        return redirect(route('listings.show', $id))->with('success', 'jop has been updated');
     }
 
     public function destroy($id)
