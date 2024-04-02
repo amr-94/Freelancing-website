@@ -46,6 +46,7 @@ class ListingController extends Controller
             $filename = time() . "." . $request->image->extension();
             $request->logo->move(public_path("images"), $filename);
             $request->merge([
+                'user_id' => Auth::user()->id,
                 'logo' => $filename
             ]);
         }
@@ -70,6 +71,12 @@ class ListingController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'],
+            'company' => ['required'],
+            'website' => ['required', 'url']
+        ]);
         $listing = Listing::findorfail($id);
         if ($request->hasFile('image')) {
             $filename = time() . '.' . $request->image->extension();
