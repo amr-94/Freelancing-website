@@ -42,21 +42,24 @@
                                 </p>
                             </td>
                             @auth
-                                <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                    <a href="{{ route('message.edit', $message->id) }}"
-                                        class="text-blue-400 px-6 py-2 rounded-xl"><i class="fa-solid fa-pen-to-square"></i>
-                                        Edit</a>
-                                </td>
-                                <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                    <form action="{{ route('message.destroy', $message->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="text-red-600">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </td>
+                                @if ($message->to_user->id == Auth::user()->id)
+                                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                        <a href="{{ route('message.edit', $message->id) }}"
+                                            class="text-blue-400 px-6 py-2 rounded-xl"><i class="fa-solid fa-pen-to-square"></i>
+                                            Edit</a>
+                                    </td>
+                                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                        <form action="{{ route('message.destroy', $message->id) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="text-red-600">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
+
                             @endauth
 
                         </tr>

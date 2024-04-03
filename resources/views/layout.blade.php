@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="images/favicon.ico" />
@@ -33,8 +34,7 @@
 
 <body class="mb-48">
     <nav class="flex justify-between items-center mb-4">
-        <a href="{{ route('listings.index') }}"><img class="w-24" src="images/logo.png" alt=""
-                class="logo" /></a>
+        <a href="/"><img class="w-24" src="images/logo.png" alt="" class="logo" /></a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @guest
 
@@ -50,13 +50,18 @@
             @endguest
             @auth
                 <li>
-                    <a class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
+                    <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}"><i
+                            class="fa-solid fa-user-plus"></i>
                         user name : {{ Auth::user()->name }}</a>
 
                 </li>
                 <li>
                     <a class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
                         Email : {{ Auth::user()->email }}</a>
+                </li>
+                <li>
+                    <a class="hover:text-laravel" href="{{ route('message.index') }}"><i class="fa-solid fa-user-plus"></i>
+                        All message </a>
                 </li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">
@@ -85,9 +90,13 @@
                 Find or post Laravel jobs & projects
             </p>
             <div>
-                <a href="register.html"
+                <a href="{{ route('register') }}"
                     class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Sign
                     Up to List a Gig</a>
+                <a href="{{ route('listings.index') }}"
+                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Back
+                    to
+                    home</a>
             </div>
         </div>
     </section>
@@ -117,10 +126,12 @@
 
     <footer
         class="fixed bottom-0 left-0 w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 md:justify-center">
+
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
         <a href="{{ route('listings.create') }}" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post
             Job</a>
+
     </footer>
 </body>
 

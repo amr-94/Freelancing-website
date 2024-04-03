@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    <a href="{{ route('listings.index') }}" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i>
+    <a href="{{ url()->previous() }}" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i>
         Back
     </a>
 
@@ -16,6 +16,8 @@
                 <img class="w-48 mr-6 mb-6" src="{{ asset("images/listings/$listing->logo") }}" alt="" />
 
                 <h3 class="text-2xl mb-2">{{ $listing->title }}</h3>
+                <a href="{{ route('user_profile.index', $listing->user->id) }}" class="text-2xl mb-2"> user :
+                    {{ $listing->user->name }}</a>
                 <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
                 <ul class="flex">
                     @foreach ($tagsArray as $tags)
@@ -51,16 +53,20 @@
                                 class="fa-solid fa-globe"></i> Visit
                             Website</a>
                         @auth
-                            <a href="{{ route('listings.edit', $listing->id) }}"
-                                class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i
-                                    class="fa-solid fa-globe"></i> Edit this jop</a>
+                            @if ($listing->user == Auth::user())
+                                <a href="{{ route('listings.edit', $listing->id) }}"
+                                    class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i
+                                        class="fa-solid fa-globe"></i> Edit this jop</a>
 
-                            <form action="{{ route('listings.destroy', $listing->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="block bg-black text-white mt-6 py-2 rounded-xl hover:opacity-80">
-                                    Delete this</button>
-                            </form>
+                                <form action="{{ route('listings.destroy', $listing->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit"
+                                        class="block bg-black text-white mt-6 py-2 rounded-xl hover:opacity-80">
+                                        Delete this</button>
+                                </form>
+                            @endif
+
                         @endauth
 
                     </div>
@@ -114,12 +120,5 @@
                             href="{{ route('register') }}" style=" color:red">
                             Register</a>
                     </div>
-                    <a href="{{ route('message.create', $listing->id) }}" style="text-align: center"
-                        class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-globe"></i>
-                        message
-                    </a>
     @endif
-    </div>
-    </div>
-    </main>
 @endsection

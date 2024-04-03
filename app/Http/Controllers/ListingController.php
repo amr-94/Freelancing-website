@@ -24,13 +24,13 @@ class ListingController extends Controller
 
         // $tagsArray = explode(",", $tagsString);
 
-        if (Auth::user() == null) {
+        // if (Auth::user() == null) {
 
 
-            return view('listing', compact('listings'));
-        } else {
-            return view('index', compact('listings'));
-        }
+        return view('listing', compact('listings'));
+        // } else {
+        // return view('index', compact('listings'));
+        // }
     }
 
     public function create()
