@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use RakibDevs\Weather\Weather;
 
 class ListingController extends Controller
 {
+
+
+
 
     public function index(Request $request)
     {
@@ -57,10 +62,25 @@ class ListingController extends Controller
 
     public function show($id)
     {
+        $wt = new Weather();
+
+        $info = $wt->getCurrentByCity('cairo');
+        $weather = $info->weather;
+
+
+
         $listing = Listing::findOrFail($id);
         $tagsString  = $listing->tags;
         $tagsArray = explode(",", $tagsString);
-        return view('showlisting', compact('listing', 'tagsArray'));
+        return view('showlisting', [
+            'listing' => $listing,
+            'tagsArray' => $tagsArray,
+            'weather' => $weather[0]->description,
+            'temp' => $info->main->temp,
+            'wind' => $info->wind->speed,
+
+
+        ]);
     }
 
     public function edit($id)
@@ -71,12 +91,7 @@ class ListingController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => ['required', 'string'],
-            'email' => ['required', 'string', 'email'],
-            'company' => ['required'],
-            'website' => ['required', 'url']
-        ]);
+
         $listing = Listing::findorfail($id);
         if ($request->hasFile('image')) {
             $filename = time() . '.' . $request->image->extension();

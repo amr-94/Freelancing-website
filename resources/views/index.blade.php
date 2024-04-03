@@ -9,8 +9,20 @@
             </header>
 
             <table class="w-full  table-auto rounded-sm">
+                <thead>
+                    <tr>
+                        <td>title</td>
+                        <td>user</td>
+                        <td>created at</td>
+                        <td>updated at</td>
+                        <td>opretions</td>
+                    </tr>
+                </thead>
                 <tbody>
-                    @foreach ($listings as $listing)
+                    @php
+                        $user = Auth::user();
+                    @endphp
+                    @foreach ($user->listings as $listing)
                         <tr class="border-gray-300">
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                 <a href="{{ route('listings.show', $listing->id) }}">
@@ -20,6 +32,16 @@
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                 <a href="">
                                     {{ $listing->user->name }}
+                                </a>
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                <a href="">
+                                    {{ $listing->created_at->diffForHumans() }}
+                                </a>
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                <a href="">
+                                    {{ $listing->updated_at->diffForHumans() }}
                                 </a>
                             </td>
                             @auth

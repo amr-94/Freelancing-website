@@ -19,12 +19,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware('activity')->group(function () {
+    Route::resource('listings', ListingController::class);
+    // Route::resource('listings', ListingController::class)->parameters([
+    //     'show' => 'title',
+    // ]);
 
-Route::resource('listings', ListingController::class)->middleware('activity');
-// Route::resource('listings', ListingController::class)->parameters([
-//     'show' => 'title',
-// ]);
+});
+
 route::resource('message', MessageController::class)->middleware('auth');
-// route::post('message/{id}', [MessageController::class, 'send'])->name('message.send')->middleware('auth');
 
 require __DIR__ . '/auth.php';
