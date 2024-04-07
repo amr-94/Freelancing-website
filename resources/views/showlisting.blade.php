@@ -16,8 +16,10 @@
                 <img class="w-48 mr-6 mb-6" src="{{ asset("images/listings/$listing->logo") }}" alt="" />
 
                 <h3 class="text-2xl mb-2">{{ $listing->title }}</h3>
-                <a href="{{ route('user_profile.index', $listing->user->id) }}" class="text-2xl mb-2"> user :
-                    {{ $listing->user->name }}</a>
+                @if ($listing->user)
+                    <a href="{{ route('user_profile.index', $listing->user->id) }}" class="text-2xl mb-2"> user :
+                        {{ $listing->user->name }}</a>
+                @endif
                 <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
                 <ul class="flex">
                     @foreach ($tagsArray as $tags)

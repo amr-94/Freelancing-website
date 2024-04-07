@@ -31,7 +31,6 @@ class LastActivityMiddleware
         if ($user) {
             $user->forceFill([
                 'last_activity' => now(),
-                // 'last_activity' => Carbon::now(),
             ])->save();
         }
 

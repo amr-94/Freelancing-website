@@ -4,32 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use RakibDevs\Weather\Weather;
+use Illuminate\Routing\Controller;
+
 
 class ListingController extends Controller
 {
-
-
-
-
     public function index(Request $request)
     {
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
-        // $tagsString  = $listings->tags;
-        // dd($tagsString);
-
-        // $tagsArray = explode(",", $tagsString);
 
         // if (Auth::user() == null) {
 
-
         return view('listing', compact('listings'));
         // } else {
-        // return view('index', compact('listings'));
+        //     return view('index', compact('listings'));
         // }
     }
 
@@ -66,8 +58,6 @@ class ListingController extends Controller
 
         $info = $wt->getCurrentByCity('cairo');
         $weather = $info->weather;
-
-
 
         $listing = Listing::findOrFail($id);
         $tagsString  = $listing->tags;

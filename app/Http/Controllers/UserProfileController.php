@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,6 +12,7 @@ class UserProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index($id)
     {
 
@@ -71,5 +73,14 @@ class UserProfileController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function mange(Request $request)
+    {
+        $search = "%$request->search%";
+        $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
+
+
+        return view('index', compact('listings'));
     }
 }

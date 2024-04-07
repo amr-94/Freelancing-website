@@ -11,7 +11,9 @@
                             <a href="{{ route('listings.show', $listing->id) }}">{{ $listing->title }}</a>
                         </h3>
                         <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
-                        {{-- <x-listing-tags :tagsCsv="$listing->tags" /> --}}
+                        <div class="text-xl font-bold mb-4"><a
+                                href="{{ route('user_profile.index', $listing->user->id) }}">jop user /
+                                {{ $listing->user->name }}</a></div>
                         @php
                             $tags = explode(',', $listing->tags);
                         @endphp
@@ -22,19 +24,17 @@
                                     <a href="#">{{ $tag }}</a>
                                 </li>
                             @endforeach
-
-
                         </ul>
 
                         <div class="text-lg mt-4">
                             <i class="fa-solid fa-location-dot"></i> {{ $listing->location }}
                         </div>
+
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-    <div>
-        {{ $listings->links() }}
-    </div>
+
+    {{ $listings->links() }}
 @endsection

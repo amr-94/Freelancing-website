@@ -29,6 +29,11 @@
             },
         };
     </script>
+    <style>
+        body {
+            width: 99%;
+        }
+    </style>
     <title>FreeLancing</title>
 </head>
 
@@ -62,6 +67,18 @@
                 <li>
                     <a class="hover:text-laravel" href="{{ route('message.index') }}"><i class="fa-solid fa-user-plus"></i>
                         All message </a>
+                </li>
+                <li>
+                    <a class="hover:text-laravel" href="{{ route('mange.index') }}"><i class="fa-solid fa-user-plus"></i>
+                        all jops from {{ Auth::user()->name }} </a>
+                </li>
+                <li>
+                    @if (Auth::user()->type == 'admin')
+                        <a class="hover:text-laravel" href="{{ route('admin.allusers') }}"><i
+                                class="fa-solid fa-user-plus"></i>
+                            All users </a>
+                    @endif
+
                 </li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">

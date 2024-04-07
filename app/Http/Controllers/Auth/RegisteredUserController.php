@@ -44,6 +44,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        // Auth()->login($user); to make session for user from store user
 
         return redirect(route('listings.index', absolute: false));
     }
