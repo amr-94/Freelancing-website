@@ -77,10 +77,10 @@
                                     <form action="{{ route('make.admin.allusers', $user->id) }}" method="post">
                                         @csrf
                                         <select name="type" id="">
-                                            {{-- <option value="">select type</option> --}}
-                                            <option value="admin" @if ($user->type == 'admin') selected @endif>make Admin
+                                            <option>select type</option>
+                                            <option value="admin">make Admin
                                             </option>
-                                            <option value="user" @if ($user->type == 'user') selected @endif>make just
+                                            <option value="user">make just
                                                 user</option>
                                         </select>
                                         <button class="text-red-600">
