@@ -20,4 +20,16 @@ class AdminController extends Controller
         $user->delete();
         return redirect()->route('admin.allusers');
     }
+
+    public function makeadmin(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->update([
+            'type' => $request->type,
+        ]);
+
+
+        return redirect()->route('admin.allusers');
+    }
 }

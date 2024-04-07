@@ -14,6 +14,7 @@
                         <td>id</td>
                         <td>name</td>
                         <td>email</td>
+                        <td>type</td>
                         <td>created at</td>
                         <td>updated at</td>
                         <td>last activity</td>
@@ -41,6 +42,11 @@
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                 <a href="">
+                                    {{ $user->type }}
+                                </a>
+                            </td>
+                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                                <a href="">
                                     {{ $user->created_at->diffForHumans() }}
                                 </a>
                             </td>
@@ -63,6 +69,23 @@
                                         <button class="text-red-600">
                                             <i class="fa-solid fa-trash-can"></i>
                                             Delete
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+
+                                    <form action="{{ route('make.admin.allusers', $user->id) }}" method="post">
+                                        @csrf
+                                        <select name="type" id="">
+                                            {{-- <option value="">select type</option> --}}
+                                            <option value="admin" @if ($user->type == 'admin') selected @endif>make Admin
+                                            </option>
+                                            <option value="user" @if ($user->type == 'user') selected @endif>make just
+                                                user</option>
+                                        </select>
+                                        <button class="text-red-600">
+                                            <i class="text-blue-400 px-6 py-2 rounded-xl"></i>
+                                            submet
                                         </button>
                                     </form>
                                 </td>

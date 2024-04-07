@@ -28,6 +28,7 @@ Route::middleware('activity')->group(function () {
     Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');
     Route::get('admin/allusers', [AdminController::class, 'Alluser'])->name('admin.allusers')->middleware('admin');
     Route::delete('admin/allusers/{id}', [AdminController::class, 'destroy'])->name('delete.admin.allusers')->middleware('admin');
+    Route::post('admin/allusers/{id}', [AdminController::class, 'makeadmin'])->name('make.admin.allusers')->middleware('admin');
     Route::get('/', [ListingController::class, 'index']);
     Route::resource('listings', ListingController::class);
     // Route::resource('listings', ListingController::class)->parameters([

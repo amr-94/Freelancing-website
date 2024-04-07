@@ -42,7 +42,6 @@
         <a href="/"><img class="w-24" src="images/logo.png" alt="" class="logo" /></a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @guest
-
                 <li>
                     <a href="{{ route('register') }}" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
                         Register</a>
@@ -58,7 +57,6 @@
                     <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}"><i
                             class="fa-solid fa-user-plus"></i>
                         user name : {{ Auth::user()->name }}</a>
-
                 </li>
                 <li>
                     <a class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
@@ -85,7 +83,6 @@
                         @csrf
                         <button type="submit" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket"></i>
                             Logout</button>
-
                     </form>
                 </li>
 
@@ -110,10 +107,12 @@
                 <a href="{{ route('register') }}"
                     class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Sign
                     Up to List a Gig</a>
+
                 <a href="{{ route('listings.index') }}"
                     class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Back
                     to
                     home</a>
+
             </div>
         </div>
     </section>
