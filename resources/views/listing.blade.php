@@ -11,9 +11,12 @@
                             <a href="{{ route('listings.show', $listing->id) }}">{{ $listing->title }}</a>
                         </h3>
                         <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
-                        <div class="text-xl font-bold mb-4"><a
-                                href="{{ route('user_profile.index', $listing->user->id) }}">jop user /
-                                {{ $listing->user->name }}</a></div>
+                        @if ($listing->user)
+                            <div class="text-xl font-bold mb-4"><a
+                                    href="{{ route('user_profile.index', $listing->user->id) }}">jop user /
+                                    {{ $listing->user->name }}</a></div>
+                        @endif
+
                         @php
                             $tags = explode(',', $listing->tags);
                         @endphp
