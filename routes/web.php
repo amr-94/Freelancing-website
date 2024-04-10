@@ -23,6 +23,7 @@ Route::middleware(['auth', 'activity'])->group(function () {
     Route::get('user_profile/{id}/edit', [UserProfileController::class, 'edit'])->name('user_profile.edit');
     Route::patch('user_profile/{id}', [UserProfileController::class, 'update'])->name('user_profile.update');
     route::get('index', [UserProfileController::class, 'mange'])->name('mange.index');
+    route::get('notify/{id}', [MessageController::class, 'notify'])->name('notify.read');
 });
 Route::middleware('activity')->group(function () {
     Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');

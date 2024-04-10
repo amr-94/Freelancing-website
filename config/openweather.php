@@ -6,7 +6,7 @@ return [
     'forecast_api_version' => '2.5',
     'polution_api_version' => '2.5',
     'geo_api_version' => '1.0',
-    'lang'         => env('OPENWEATHER_API_LANG', 'en'),
+    'lang'         => 'ar',
     'date_format'       => 'm/d/Y',
     'time_format'       => 'h:i A',
     'day_format'        => 'l',

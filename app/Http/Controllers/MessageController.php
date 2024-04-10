@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
+use App\Notifications\MessageNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,15 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+
         $messages = Message::where('to_user_id', Auth::user()->id)->get();
 
-        return view("message", compact('messages'));
+        return view("message", [
+            'messages' => $messages,
+
+        ]);
     }
 
     /**
@@ -34,9 +41,10 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         $message = Message::create($request->all());
+        $sendto = user::find($request->to_user_id);
+        $sendto->notify(new MessageNotification($message));
+
         return redirect(route('message.index'));
     }
 
@@ -70,5 +78,13 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         //
+    }
+
+
+    public function notify($id)
+    {
+        $user = Auth::user();
+        $user->notifications->where('id', $id)->first()->markAsread();
+        return redirect(route('message.index'));
     }
 }

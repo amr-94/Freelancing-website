@@ -14,6 +14,7 @@ class ListingController extends Controller
 {
     public function index(Request $request)
     {
+
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
 

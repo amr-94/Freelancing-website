@@ -40,6 +40,7 @@
 <body class="mb-48">
     <nav class="flex justify-between items-center mb-4">
         <a href="/"><img class="w-24" src="images/logo.png" alt="" class="logo" /></a>
+
         <ul class="flex space-x-6 mr-6 text-lg">
             @guest
                 <li>
@@ -53,6 +54,7 @@
                 </li>
             @endguest
             @auth
+
                 <li>
                     <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}"><i
                             class="fa-solid fa-user-plus"></i>
@@ -89,7 +91,12 @@
             @endauth
 
         </ul>
+
     </nav>
+    @auth
+        @component('components.notify')
+        @endcomponent
+    @endauth
 
     <!-- Hero -->
     <section class="relative h-72 bg-laravel flex flex-col justify-center align-center text-center space-y-4 mb-4">
