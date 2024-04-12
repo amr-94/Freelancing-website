@@ -12,6 +12,12 @@ use Illuminate\Routing\Controller;
 
 class ListingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+        // OR
+        // $this->middleware('auth')->only(['store','update','edit','create']);
+    }
     public function index(Request $request)
     {
 

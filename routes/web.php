@@ -19,10 +19,10 @@ Route::get('/dashboard', function () {
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'activity']
     ],
     function () {
-        Route::middleware(['auth', 'activity'])->group(function () {
+        Route::middleware(['auth'])->group(function () {
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -30,19 +30,15 @@ Route::group(
             Route::patch('user_profile/{id}', [UserProfileController::class, 'update'])->name('user_profile.update');
             route::get('index', [UserProfileController::class, 'mange'])->name('mange.index');
             route::get('notify/{id}', [MessageController::class, 'notify'])->name('notify.read');
+            Route::get('admin/allusers', [AdminController::class, 'Alluser'])->name('admin.allusers')->middleware('admin');
+            Route::delete('admin/allusers/{id}', [AdminController::class, 'destroy'])->name('delete.admin.allusers')->middleware('admin');
+            Route::post('admin/allusers/{id}', [AdminController::class, 'makeadmin'])->name('make.admin.allusers')->middleware('admin');
         });
-        Route::middleware('activity')->group(function () {
-            Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');
-            Route::get('admin/allusers', [AdminController::class, 'Alluser'])->name('admin.allusers')->middleware('auth', 'admin');
-            Route::delete('admin/allusers/{id}', [AdminController::class, 'destroy'])->name('delete.admin.allusers')->middleware('auth', 'admin');
-            Route::post('admin/allusers/{id}', [AdminController::class, 'makeadmin'])->name('make.admin.allusers')->middleware('auth', 'admin');
-            Route::get('/', [ListingController::class, 'index']);
-            Route::resource('listings', ListingController::class);
-            // Route::resource('listings', ListingController::class)->parameters([
-            //     'show' => 'title',
-            // ]);
-
-        });
+        // Route::middleware('activity')->group(function () {
+        Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');
+        Route::get('/', [ListingController::class, 'index']);
+        Route::resource('listings', ListingController::class);
+        // });
 
         route::resource('message', MessageController::class)->middleware('auth');
     }
