@@ -24,12 +24,7 @@ class ListingController extends Controller
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
 
-        // if (Auth::user() == null) {
-
         return view('listing', compact('listings'));
-        // } else {
-        //     return view('index', compact('listings'));
-        // }
     }
 
     public function create()
