@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use RakibDevs\Weather\Weather;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\Config;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ListingController extends Controller
 {
@@ -56,6 +57,8 @@ class ListingController extends Controller
 
     public function show($id)
     {
+
+
         $wt = new Weather();
 
         $info = $wt->getCurrentByCity('cairo');

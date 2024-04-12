@@ -19,10 +19,10 @@ Route::get('/dashboard', function () {
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'activity']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-        Route::middleware(['auth'])->group(function () {
+        Route::middleware(['auth', 'activity'])->group(function () {
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -34,11 +34,9 @@ Route::group(
             Route::delete('admin/allusers/{id}', [AdminController::class, 'destroy'])->name('delete.admin.allusers')->middleware('admin');
             Route::post('admin/allusers/{id}', [AdminController::class, 'makeadmin'])->name('make.admin.allusers')->middleware('admin');
         });
-        // Route::middleware('activity')->group(function () {
         Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');
         Route::get('/', [ListingController::class, 'index']);
         Route::resource('listings', ListingController::class);
-        // });
 
         route::resource('message', MessageController::class)->middleware('auth');
     }
