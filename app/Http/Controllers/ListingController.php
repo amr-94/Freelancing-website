@@ -16,7 +16,7 @@ class ListingController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         // OR
-        // $this->middleware('auth')->only(['store','update','edit','create']);
+        // $this->middleware('auth')->only(['store', 'update', 'edit', 'create']);
     }
     public function index(Request $request)
     {
