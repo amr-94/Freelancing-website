@@ -13,7 +13,7 @@
                         <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
                         @if ($listing->user)
                             <div class="text-xl font-bold mb-4"><a
-                                    href="{{ route('user_profile.index', $listing->user->id) }}">jop user /
+                                    href="{{ route('user_profile.index', $listing->user->id) }}"> jop user /
                                     {{ $listing->user->name }}</a></div>
                         @endif
 

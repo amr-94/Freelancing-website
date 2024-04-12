@@ -43,14 +43,24 @@
 
         <ul class="flex space-x-6 mr-6 text-lg">
             @guest
+                <ul>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                href="{{ LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
                 <li>
                     <a href="{{ route('register') }}" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
-                        Register</a>
+                        @lang('main.register')</a>
                 </li>
                 <li>
                     <a href="{{ route('login') }}" class="hover:text-laravel"><i
                             class="fa-solid fa-arrow-right-to-bracket"></i>
-                        Login</a>
+                        @lang('main.login')</a>
                 </li>
             @endguest
             @auth
@@ -108,17 +118,16 @@
                 Lara<span class="text-black">Gigs</span>
             </h1>
             <p class="text-2xl text-gray-200 font-bold my-4">
-                Find or post Laravel jobs & projects
+                @lang('main.Find or post Laravel jobs & projects')
             </p>
             <div>
                 <a href="{{ route('register') }}"
-                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Sign
-                    Up to List a Gig</a>
+                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+                    @lang('main.Sign Up to List a Gig')</a>
 
                 <a href="{{ route('listings.index') }}"
-                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Back
-                    to
-                    home</a>
+                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+                    @lang('main.Back to home')</a>
 
             </div>
         </div>
@@ -152,8 +161,8 @@
 
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
-        <a href="{{ route('listings.create') }}" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post
-            Job</a>
+        <a href="{{ route('listings.create') }}" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">
+            @lang('main.Post Job')</a>
 
     </footer>
 </body>
