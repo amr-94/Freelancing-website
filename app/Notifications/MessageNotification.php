@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class MessageNotification extends Notification
 {
     public $message;
+    public $sender;
     use Queueable;
 
     /**
@@ -19,6 +20,7 @@ class MessageNotification extends Notification
     public function __construct($message)
     {
         $this->message = $message;
+        $this->sender = Auth::user()->name;
     }
 
     /**
@@ -37,8 +39,8 @@ class MessageNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
+            ->line("user $this->sender send message to you")
+            ->action('go to all message', url(route('message.index')))
             ->line('Thank you for using our application!');
     }
 

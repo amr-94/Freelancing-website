@@ -19,10 +19,12 @@ class MessageController extends Controller
         $user = Auth::user();
 
 
-        $messages = Message::where('to_user_id', Auth::user()->id)->get();
+        $messages = Message::where('to_user_id', Auth::user()->id)->latest()->get();
+        $tomessages = Message::where('from_user_id', Auth::user()->id)->latest()->get();
 
         return view("message", [
             'messages' => $messages,
+            'tomessages' => $tomessages,
 
         ]);
     }
@@ -75,9 +77,11 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Message $message)
+    public function destroy($id)
     {
-        //
+        $message = message::find($id);
+        $message->delete();
+        return redirect(route('message.index'));
     }
 
 
