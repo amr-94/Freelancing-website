@@ -36,8 +36,19 @@
                             <a href="{{ route('register') }}" class="text-laravel">Register</a>
                         </p>
                     </div>
+                    {{-- Laracoding Login with Google Demo --}}
+                    <div class="block mt-4">
+                        <div class="flex items-center justify-end mt-4">
+                            <a href="{{ route('auth.google') }}">
+                                <img
+                                    src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+                            </a>
+                        </div>
+                    </div>
                 </form>
             </div>
+
         </div>
+
     </main>
 @endsection

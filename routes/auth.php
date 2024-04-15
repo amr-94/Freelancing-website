@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -45,9 +46,11 @@ Route::group(
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'activity']
+        'middleware' => ['auth', 'activity', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'activity']
     ],
     function () {
+        //facebook login
+
         Route::get('verify-email', EmailVerificationPromptController::class)
             ->name('verification.notice');
 

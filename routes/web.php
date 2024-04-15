@@ -1,17 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
-use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// GoogleLoginController redirect and callback urls
+Route::get('/login/google', [GoogleLoginController::class, 'redirectToProvider'])->name('auth.google');
+Route::get('/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
