@@ -1,8 +1,8 @@
-<button
-    class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+<p class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
     data-ripple-dark="true" data-popover-target="notifications-menu">
-    <i class="text-lg leading-none fas fa-bell"></i>
-</button>
+    <i class="text-lg leading-none fas fa-bell">
+    </i> notifications
+</p>
 <ul role="menu" data-popover="notifications-menu" data-popover-placement="bottom"
     class="absolute z-10 flex min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
     <button role="menuitem"

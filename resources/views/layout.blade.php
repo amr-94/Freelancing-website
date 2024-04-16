@@ -84,6 +84,10 @@
                         all jops from {{ Auth::user()->name }} </a>
                 </li>
                 <li>
+                    <a class="hover:text-laravel" href="{{ route('listing.trash') }}"><i class="fa-solid fa-user-plus"></i>
+                        Trash </a>
+                </li>
+                <li>
                     @if (Auth::user()->type == 'admin')
                         <a class="hover:text-laravel" href="{{ route('admin.allusers') }}"><i
                                 class="fa-solid fa-user-plus"></i>
@@ -122,9 +126,12 @@
                 @lang('main.Find or post Laravel jobs & projects')
             </p>
             <div>
-                <a href="{{ route('register') }}"
-                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
-                    @lang('main.Sign Up to List a Gig')</a>
+                @guest
+
+                    <a href="{{ route('register') }}"
+                        class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+                        @lang('main.Sign Up to List a Gig')</a>
+                @endguest
 
                 <a href="{{ route('listings.index') }}"
                     class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">

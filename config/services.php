@@ -30,7 +30,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'google' => [
+        'client_id' => '1062485156110-075b070p4dbqhm5a8o2p1966h0sldq2e.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost.login.google',
+    ],
 
 
 ];

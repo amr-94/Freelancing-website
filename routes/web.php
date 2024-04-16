@@ -35,6 +35,9 @@ Route::group(
             Route::get('admin/allusers', [AdminController::class, 'Alluser'])->name('admin.allusers')->middleware('admin');
             Route::delete('admin/allusers/{id}', [AdminController::class, 'destroy'])->name('delete.admin.allusers')->middleware('admin');
             Route::post('admin/allusers/{id}', [AdminController::class, 'makeadmin'])->name('make.admin.allusers')->middleware('admin');
+            Route::get('listing/trash', [ListingController::class, 'trash'])->name('listing.trash');
+            Route::put('listings/{title}/trash/restore', [ListingController::class, 'restore'])->name('listing.restore');
+            Route::delete('listings/{title}/trash/delete', [ListingController::class, 'force_delete'])->name('listing.force_delete');
         });
         Route::get('user_profile/{id}', [UserProfileController::class, 'index'])->name('user_profile.index');
         Route::get('/', [ListingController::class, 'index']);

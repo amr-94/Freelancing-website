@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use RakibDevs\Weather\Weather;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Config;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 class ListingController extends Controller
 {
@@ -106,6 +105,28 @@ class ListingController extends Controller
     {
         $listing = listing::findorfail($id);
         $listing->destroy($id);
-        return redirect(route('listings.index'));
+        return redirect(route('listing.trash'));
+    }
+    public function trash()
+    {
+        $user = Auth::user();
+        $listings = Listing::onlyTrashed()->where('user_id', $user->id)->get();
+        return view('trash.trash', compact('listings'));
+    }
+
+    public function restore($title)
+    {
+
+        $listings = Listing::onlyTrashed()->where('title', $title);
+        $listings->restore();
+        return redirect(route('listing.trash'));
+    }
+
+    public function force_delete($title)
+    {
+
+        $listings = Listing::onlyTrashed()->where('title', $title);
+        $listings->forceDelete();
+        return redirect(route('listing.trash'));
     }
 }
