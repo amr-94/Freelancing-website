@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('listings.index', absolute: false));
+        return redirect()->intended(route('user_profile.index', Auth::id(), absolute: false));
     }
 
     /**

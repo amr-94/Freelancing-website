@@ -67,12 +67,15 @@
             @auth
 
                 <li>
-                    <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}"><i
-                            class="fa-solid fa-user-plus"></i>
+
+                    <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}">
+                        <img src="{{ asset('images/users/' . Auth::user()->user_image) }}" alt="" width="32"
+                            height="32" class="fa-solid fa-user-plus">
                         user name : {{ Auth::user()->name }}</a>
                 </li>
                 <li>
-                    <a class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
+                    <a class="hover:text-laravel" href="{{ route('user_profile.index', Auth::user()->id) }}"><i
+                            class="fa-solid fa-user-plus"></i>
                         Email : {{ Auth::user()->email }}</a>
                 </li>
                 <li>
@@ -120,7 +123,7 @@
 
         <div class="z-10">
             <h1 class="text-6xl font-bold uppercase text-white">
-                Lara<span class="text-black">Gigs</span>
+                FreeLancing <span class="text-black">Gigs</span>
             </h1>
             <p class="text-2xl text-gray-200 font-bold my-4">
                 @lang('main.Find or post Laravel jobs & projects')

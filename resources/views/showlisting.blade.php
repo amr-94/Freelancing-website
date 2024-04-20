@@ -78,7 +78,7 @@
     </div>
 
     {{--  message to listing user --}}
-    @if (Auth::user())
+    @if ($listing->user->id !== Auth::user()->id)
         <main>
             <div class="mx-4">
                 <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
@@ -117,10 +117,13 @@
                         </div>
                     </form>
                 @else
-                    <div style="text-align: center ; color:black">
-                        <a href="{{ route('login') }}" style=" color:red"> login </a>to send message Or<a
-                            href="{{ route('register') }}" style=" color:red">
-                            Register</a>
-                    </div>
+                    @guest
+
+                        <div style="text-align: center ; color:black">
+                            <a href="{{ route('login') }}" style=" color:red"> login </a>to send message Or<a
+                                href="{{ route('register') }}" style=" color:red">
+                                Register</a>
+                        </div>
+                    @endguest
     @endif
 @endsection

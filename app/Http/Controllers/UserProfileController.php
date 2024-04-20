@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\User;
+use App\Services\MarvelService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class UserProfileController extends Controller
 {
+    protected $marvelService;
+
+
     /**
      * Display a listing of the resource.
      */
 
     public function index($id)
     {
+
 
         $user = User::where('id', $id)->first();
         $attachments = json_decode($user->attachment);
@@ -79,8 +84,6 @@ class UserProfileController extends Controller
     {
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
-
-
         return view('index', compact('listings'));
     }
 }

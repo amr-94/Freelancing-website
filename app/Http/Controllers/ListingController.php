@@ -34,6 +34,7 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => ['required', 'string'],
             'company' => ['required', 'string', 'unique:listings,company'],
@@ -45,8 +46,10 @@ class ListingController extends Controller
             $filename = time() . "." . $request->image->extension();
             $request->logo->move(public_path("images"), $filename);
             $request->merge([
-                'user_id' => Auth::user()->id,
                 'logo' => $filename
+            ]);
+            $request->merge([
+                'user_id' => Auth::user()->id,
             ]);
         }
         Listing::create($request->all());
@@ -79,26 +82,34 @@ class ListingController extends Controller
 
     public function edit($id)
     {
+
         $listing = Listing::findOrFail($id);
-        return view("editlisting", compact("listing"));
+        if ($listing->user_id == Auth::id()) {
+            return view("editlisting", compact("listing"));
+        } else {
+            return redirect()->route('listings.index');
+        }
     }
 
     public function update(Request $request, $id)
     {
-
         $listing = Listing::findorfail($id);
-        if ($request->hasFile('image')) {
-            $filename = time() . '.' . $request->image->extension();
-            $request->image->move(public_path("/images/listings"), $filename);
-            $request->merge([
-                'logo' => $filename
-            ]);
+        if ($listing->user_id == Auth::id()) {
+            if ($request->hasFile('image')) {
+                $filename = time() . '.' . $request->image->extension();
+                $request->image->move(public_path("/images/listings"), $filename);
+                $request->merge([
+                    'logo' => $filename
+                ]);
+            }
+            if ($listing->logo !== null && $request->image !== null) {
+                File::delete(public_path("/images/listings/") . $listing->logo);
+            }
+            $listing->update($request->all());
+            return redirect(route('listings.show', $id))->with('success', 'jop has been updated');
+        } else {
+            return redirect()->route('listings.index');
         }
-        if ($listing->logo !== null && $request->image !== null) {
-            File::delete(public_path("/images/listings/") . $listing->logo);
-        }
-        $listing->update($request->all());
-        return redirect(route('listings.show', $id))->with('success', 'jop has been updated');
     }
 
     public function destroy($id)

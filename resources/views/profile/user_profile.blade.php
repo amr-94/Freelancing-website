@@ -7,7 +7,7 @@
             @if ($user->user_image)
                 <img src="{{ asset("images/users/$user->user_image") }}" class="img-fluid">
             @else
-                <img src="{{ asset('profile_photo/') }}" width="100%" />
+                <p>there is no PiC </p>
             @endif
             <div class="d-flex justify-content-between">
                 <p><b> User Name :</b>{{ $user->name }}</p>
@@ -115,4 +115,6 @@
         @endauth
 
     </div>
+
+
 @endsection

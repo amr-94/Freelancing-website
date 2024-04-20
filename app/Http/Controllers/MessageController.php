@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use App\Models\Message;
 use App\Models\User;
 use App\Notifications\MessageNotification;
@@ -43,7 +44,9 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = Message::create($request->all());
+        $listing_user_id = Listing::find($request->listing_id)->user_id;
+        if (Auth::check() && Auth::user()->id !== $listing_user_id)
+            $message = Message::create($request->all());
         $sendto = user::find($request->to_user_id);
         $sendto->notify(new MessageNotification($message));
 

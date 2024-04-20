@@ -5,7 +5,8 @@ return [
     'register' => 'register',
     'Back to home' => 'Back to home',
     'Sign Up to List a Gig' => 'Sign Up to List a Gig',
-    'Post Job' => ' Post Job'
+    'Post Job' => ' Post Job',
+    'Find or post Laravel jobs & projects' => 'Find or post Laravel jobs & projects',
 
 
 ];
