@@ -167,7 +167,6 @@
             @foreach (Auth::user()->unreadnotifications as $notification)
                 <div class="card my-2">
                     <div class="card-body">
-
                         @if ($notification->unread())
                             <a href="{{ route('notify.read', $notification->id) }}"
                                 style="text-decoration: none;color: red">

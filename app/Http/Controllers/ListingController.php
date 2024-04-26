@@ -61,10 +61,10 @@ class ListingController extends Controller
     {
 
 
-        $wt = new Weather();
+        // $wt = new Weather();
 
-        $info = $wt->getCurrentByCity('cairo');
-        $weather = $info->weather;
+        // $info = $wt->getCurrentByCity('cairo');
+        // $weather = $info->weather;
 
         $listing = Listing::findOrFail($id);
         $tagsString  = $listing->tags;
@@ -72,9 +72,9 @@ class ListingController extends Controller
         return view('showlisting', [
             'listing' => $listing,
             'tagsArray' => $tagsArray,
-            'weather' => $weather[0]->description,
-            'temp' => $info->main->temp,
-            'wind' => $info->wind->speed,
+            // 'weather' => $weather[0]->description,
+            // 'temp' => $info->main->temp,
+            // 'wind' => $info->wind->speed,
 
 
         ]);

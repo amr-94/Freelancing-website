@@ -8,9 +8,9 @@
     @endcomponent
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded">
-            <p> weather : {{ $weather }}</p>
+            {{-- <p> weather : {{ $weather }}</p>
             <p> temp : {{ $temp }}</p>
-            <p>wind : {{ $wind }}</p>
+            <p>wind : {{ $wind }}</p> --}}
 
             <div class="flex flex-col items-center justify-center text-center">
                 <img class="w-48 mr-6 mb-6" src="{{ asset("images/listings/$listing->logo") }}" alt="" />
@@ -78,7 +78,11 @@
     </div>
 
     {{--  message to listing user --}}
-    @if ($listing->user->id !== Auth::user()->id)
+    @auth
+
+        @if ($listing->user->id !== Auth::user()->id)
+        @endauth
+
         <main>
             <div class="mx-4">
                 <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">

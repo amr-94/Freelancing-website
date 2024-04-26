@@ -44,9 +44,9 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $listing_user_id = Listing::find($request->listing_id)->user_id;
-        if (Auth::check() && Auth::user()->id !== $listing_user_id)
-            $message = Message::create($request->all());
+        // $listing_user_id = Listing::find($request->from_user_id);
+        // if (Auth::check() && Auth::user()->id !== $listing_user_id)
+        $message = Message::create($request->all());
         $sendto = user::find($request->to_user_id);
         $sendto->notify(new MessageNotification($message));
 

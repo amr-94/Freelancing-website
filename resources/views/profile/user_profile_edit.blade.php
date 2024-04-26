@@ -35,7 +35,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="user_img" class="form-label">Image</label>
-                    <input class="form-control" type="file" name="user_img" value="{{ $user->user_image }}">
+                    <input class="form-control" type="file" name="user_img">
                 </div>
                 <div class="mb-3">
                     <label for="user_image" class="form-label">attach</label>
