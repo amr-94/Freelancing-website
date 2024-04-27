@@ -117,4 +117,39 @@
     </div>
 
 
+    <div class="container">
+
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"> Name</th>
+                    <th scope="col">url</th>
+                    <th scope="col">recent_date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{-- blade templating => foreach loop --}}
+                @foreach ($collection as $item)
+                    <tr>
+
+                        <td>{{ $item['id'] }} </td>
+                        <td>{{ $item['name'] }} </td>
+                        <td><audio controls>
+                                <source src="{{ $item['url'] }}" type="audio/mpeg">
+                            </audio></td>
+                        <td>{{ $item['recent_date'] }}"</td>
+
+
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+
+
 @endsection

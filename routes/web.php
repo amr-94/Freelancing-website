@@ -46,5 +46,4 @@ Route::group(
         route::resource('message', MessageController::class)->middleware('auth');
     }
 );
-
 require __DIR__ . '/auth.php';

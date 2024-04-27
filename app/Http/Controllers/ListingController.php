@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\File;
 use RakibDevs\Weather\Weather;
 use Illuminate\Routing\Controller;
 
-
 class ListingController extends Controller
 {
     public function __construct()
@@ -20,6 +19,8 @@ class ListingController extends Controller
     }
     public function index(Request $request)
     {
+
+
 
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
