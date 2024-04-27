@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Models\User;
 use App\Services\MarvelService;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 
 class UserProfileController extends Controller
 {
@@ -20,8 +22,6 @@ class UserProfileController extends Controller
     public function index($id)
     {
         $dataQuran = Http::get("https://www.mp3quran.net/api/v3/radios?language=ar");
-        // dd($dataQuran['radios']);
-
 
         $user = User::where('id', $id)->first();
         $attachments = json_decode($user->attachment);
