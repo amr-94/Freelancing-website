@@ -1,18 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\FacebookController;
-use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // GoogleLoginController redirect and callback urls
-Route::get('/login/google', [GoogleLoginController::class, 'redirectToProvider'])->name('auth.google');
-Route::get('/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback']);
 
 
 Route::get('/dashboard', function () {
@@ -45,5 +42,9 @@ Route::group(
 
         route::resource('message', MessageController::class)->middleware('auth');
     }
+
 );
+
+Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])->name('auth.redirect');
+Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('auth.callback');
 require __DIR__ . '/auth.php';
