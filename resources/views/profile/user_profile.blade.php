@@ -6,6 +6,7 @@
         <div class="col-md-12">
             @if ($user->user_image)
                 <img src="{{ asset("images/users/$user->user_image") }}" class="img-fluid">
+                <img src="{{ $user->user_image }}" class="img-fluid">
             @else
                 <p>there is no PiC </p>
             @endif
@@ -129,9 +130,7 @@
                     <th scope="col">recent_date</th>
                 </tr>
             </thead>
-            <tbody>
-
-                {{-- blade templating => foreach loop --}}
+            {{-- <tbody>
                 @foreach ($collection as $item)
                     <tr>
 
@@ -146,7 +145,7 @@
 
                     </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
 
     </div>

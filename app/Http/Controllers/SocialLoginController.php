@@ -14,11 +14,11 @@ class SocialLoginController extends Controller
 
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->stateless()->redirect();
+        return Socialite::driver($provider)->redirect();
     }
     public function callback($provider): RedirectResponse
     {
-        $user = Socialite::driver($provider)->stateless()->user();
+        $user = Socialite::driver($provider)->user();
 
         // dd($user);
         $existingUser = User::where('google_id', $user->id)->first();
@@ -32,6 +32,7 @@ class SocialLoginController extends Controller
             $newUser->name = $user->name;
             $newUser->email = $user->email;
             $newUser->google_id = $user->id;
+            $newUser->user_image = $user->avatar;
             $newUser->password = bcrypt(request(Str::random())); // Set some random password
             $newUser->save();
 
