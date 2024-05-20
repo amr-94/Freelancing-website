@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('dashbord.layout')
 @section('content')
     {{-- message to you --}}
     <div class="mx-4">

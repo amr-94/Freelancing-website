@@ -45,7 +45,15 @@ class UserProfileController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::where('id', $id)->first();
-
+        $fileattach = json_decode($user->attachment);
+        if ($request->attach) {
+            foreach ($fileattach as $attach) {
+                File::delete(public_path("images/users/attach/") . $attach);
+            }
+        }
+        if ($request->user_img) {
+            File::delete(public_path("images/users/") . $user->user_image);
+        }
 
         if ($request->hasfile('user_img')) {
             $filename = time() . '.' . $request->user_img->extension();
@@ -65,15 +73,7 @@ class UserProfileController extends Controller
                 ]);
             }
         }
-        $fileattach = json_decode($user->attachment);
-        if ($request->attach) {
-            foreach ($fileattach as $attach) {
-                File::delete(public_path("images/users/attach/") . $attach);
-            }
-        }
-        if ($request->user_img) {
-            File::delete(public_path("images/users/") . $user->user_image);
-        }
+
         $user->update($request->all());
         return redirect(route('user_profile.index', $id))->with('success', 'user has been updated');
     }

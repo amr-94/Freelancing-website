@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('dashbord.layout')
 @section('content')
     <main>
         <div class="mx-4">

@@ -25,7 +25,7 @@ class ListingController extends Controller
         $search = "%$request->search%";
         $listings = Listing::whereAny(['title', 'tags', 'company'], 'like', $search)->latest()->paginate(4);
 
-        return view('listing', compact('listings'));
+        return view('dashbord.listing', compact('listings'));
     }
 
     public function create()
@@ -70,7 +70,7 @@ class ListingController extends Controller
         $listing = Listing::findOrFail($id);
         $tagsString  = $listing->tags;
         $tagsArray = explode(",", $tagsString);
-        return view('showlisting', [
+        return view('dashbord.showlisting', [
             'listing' => $listing,
             'tagsArray' => $tagsArray,
             // 'weather' => $weather[0]->description,

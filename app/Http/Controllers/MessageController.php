@@ -23,7 +23,7 @@ class MessageController extends Controller
         $messages = Message::where('to_user_id', Auth::user()->id)->latest()->get();
         $tomessages = Message::where('from_user_id', Auth::user()->id)->latest()->get();
 
-        return view("message", [
+        return view("dashbord.message", [
             'messages' => $messages,
             'tomessages' => $tomessages,
 
